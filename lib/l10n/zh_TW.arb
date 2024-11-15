@@ -1,0 +1,11 @@
+{
+  "@@locale": "zh_TW",
+  "camping_name": "名稱",
+  "camping_address": "地址",
+  "camping_phone_number": "電話",
+  "camping_website": "網站",
+  "compliant_relevant_regulations": "符合相關法規",
+  "violation_relevant_regulations": "違反相關法規",
+  "search_camping_site_hint": "輸入名稱或地址搜尋",
+  "camping_site_list": "露營區列表"
+}

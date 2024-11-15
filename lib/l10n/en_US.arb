@@ -1,0 +1,11 @@
+{
+  "@@locale": "en_US",
+  "camping_name": "Name",
+  "camping_address": "Address",
+  "camping_phone_number": "Phone Number",
+  "camping_website": "Website",
+  "compliant_relevant_regulations": "Regulatory Compliance",
+  "violation_relevant_regulations": "Regulatory Violation",
+  "search_camping_site_hint": "Search by name or address",
+  "camping_site_list": "Camping Site List"
+}
