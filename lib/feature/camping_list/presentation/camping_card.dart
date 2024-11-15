@@ -1,4 +1,5 @@
 import 'package:camping/extension/string_extension.dart';
+import 'package:camping/feature/component/link_text.dart';
 import 'package:camping/style/color_style.dart';
 import 'package:camping/style/style.dart';
 import 'package:camping/style/text_style.dart';
@@ -110,15 +111,9 @@ class _Info extends StatelessWidget {
             Text('$title', style: TextStyle(fontSize: normal.sp)),
             Padding(
               padding: EdgeInsets.only(left: normalPadding.w),
-              child: GestureDetector(
+              child: LinkText(
+                content: content,
                 onTap: canTap ? onTap : null,
-                child: Text(
-                  '$content',
-                  style: TextStyle(
-                    fontSize: normal.sp,
-                    color: canTap ? linkFontColor : mainFontColor,
-                  ),
-                ),
               ),
             ),
           ],

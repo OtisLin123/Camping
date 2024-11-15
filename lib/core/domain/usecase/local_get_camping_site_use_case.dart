@@ -1,6 +1,7 @@
 import 'package:camping/core/data/model/camping_site.dart';
 import 'package:camping/core/domain/usecase/get_camping_site_use_case.dart';
 import 'package:camping/core/repositories/local_repository.dart';
+import 'package:uuid/uuid.dart';
 
 class LocalGetCampingSiteUseCase implements GetCampingSiteUseCase {
   @override
@@ -12,6 +13,7 @@ class LocalGetCampingSiteUseCase implements GetCampingSiteUseCase {
         camping['電話'] = '';
       }
       result.add(CampingSite(
+        uuid: const Uuid().v4(),
         name: camping['露營場名稱'],
         county: camping['縣市別'],
         township: camping['鄉/鎮/市/區'],

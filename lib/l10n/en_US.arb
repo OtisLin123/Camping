@@ -7,5 +7,7 @@
   "compliant_relevant_regulations": "Regulatory Compliance",
   "violation_relevant_regulations": "Regulatory Violation",
   "search_camping_site_hint": "Search by name or address",
-  "camping_site_list": "Camping Site List"
+  "camping_site_list": "Camping Site List",
+  "resource_declaration": "Resource Declaration",
+  "settings": "Settings"
 }

@@ -1,4 +1,6 @@
 class CampingSite {
+  String? uuid;
+
   ///露營場名稱
   String? name;
 
@@ -57,6 +59,7 @@ class CampingSite {
   String? website;
 
   CampingSite({
+    this.uuid,
     this.name,
     this.county,
     this.township,

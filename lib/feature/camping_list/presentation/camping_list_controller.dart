@@ -1,5 +1,7 @@
 import 'package:camping/core/data/model/camping_site.dart';
 import 'package:camping/core/domain/usecase/get_camping_site_use_case.dart';
+import 'package:camping/feature/camping_list/domain/entities/camping_card_data.dart';
+import 'package:camping/feature/camping_list/domain/usecase/convert_camping_card_datas_use_case.dart';
 import 'package:camping/feature/open_map/open_map.dart';
 import 'package:fuzzy/fuzzy.dart';
 import 'package:rxdart/subjects.dart';
@@ -11,8 +13,8 @@ class CampingListController {
   BehaviorSubject<List<CampingSite?>?> campingSities =
       BehaviorSubject<List<CampingSite?>?>.seeded(null);
 
-  BehaviorSubject<List<CampingSite?>?> searchCampingSities =
-      BehaviorSubject<List<CampingSite?>?>.seeded(null);
+  BehaviorSubject<List<CampingCardData?>?> campingSiteCardDatas =
+      BehaviorSubject<List<CampingCardData?>?>.seeded(null);
 
   CampingListController({
     this.getCampingSiteUseCase,
@@ -50,8 +52,10 @@ class CampingListController {
 
   void doFuzzy(String? text) {
     if (text?.isEmpty != false) {
-      searchCampingSities.add(
-        campingSities.value,
+      campingSiteCardDatas.add(
+        ConvertCampingCardDatasUseCase().convertToCardDatas(
+          datas: campingSities.value,
+        ),
       );
       return;
     }
@@ -75,10 +79,12 @@ class CampingListController {
     );
     final results = fuse.search(text ?? '');
 
-    searchCampingSities.add(
+    campingSiteCardDatas.add(
       List.generate(
         results.length,
-        (index) => results[index].item,
+        (index) => ConvertCampingCardDatasUseCase().convertToCardData(
+          data: results[index].item,
+        ),
       ),
     );
   }

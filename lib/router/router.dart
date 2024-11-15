@@ -1,4 +1,6 @@
-import 'package:camping/feature/camping_list/camping_list_page.dart';
+import 'package:camping/feature/camping_list/presentation/camping_list_page.dart';
+import 'package:camping/feature/resource_declaration/presentation/resource_declaration_page.dart';
+import 'package:camping/feature/setting/presentation/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,6 +13,16 @@ final appRouter = GoRouter(
       path: '/',
       name: 'campingListPage',
       builder: (context, state) => const CampingListPage(),
+    ),
+    GoRoute(
+      path: '/resourceDeclarationPage',
+      name: 'resourceDeclarationPage',
+      builder: (context, state) => const ResourceDeclarationPage(),
+    ),
+    GoRoute(
+      path: '/settingPage',
+      name: 'settingPage',
+      builder: (context, state) => const SettingPage(),
     ),
   ],
   redirect: (context, GoRouterState state) {
