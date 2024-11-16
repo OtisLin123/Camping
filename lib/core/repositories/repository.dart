@@ -23,7 +23,7 @@ class Repository implements Repositories {
     String? longitude,
     String? aboveSeaLevel,
   }) async {
-    if (latitude == null || longitude == null) {
+    if ((latitude?.isEmpty ?? true) || (longitude?.isEmpty ?? true)) {
       return {};
     }
     dynamic keyData = jsonDecode(
