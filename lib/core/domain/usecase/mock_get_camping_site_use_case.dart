@@ -12,6 +12,10 @@ class MockGetCampingSiteUseCase implements GetCampingSiteUseCase {
       if (camping['電話'] == '無') {
         camping['電話'] = '';
       }
+      String? wgs = camping['經緯度_WGS84'];
+      if (wgs?.contains('\n') ?? false) {
+        wgs = wgs?.replaceAll('\n', ',');
+      }
       result.add(CampingSite(
         uuid: const Uuid().v4(),
         name: camping['露營場名稱'],
@@ -28,7 +32,7 @@ class MockGetCampingSiteUseCase implements GetCampingSiteUseCase {
         nationalScenicArea: camping['國家風景區'],
         nationalForestRecreationArea: camping['國家森林遊樂區'],
         businessStatusCategory: camping['營業狀態類別'],
-        latitudeAndLongitude: camping['經緯度_WGS84'],
+        latitudeAndLongitude: wgs,
         landParcelNumber: camping['土地座落地號'],
         address: camping['地址'],
         telephone: camping['電話'],
