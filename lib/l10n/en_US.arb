@@ -9,5 +9,14 @@
   "search_camping_site_hint": "Search by name or address",
   "camping_site_list": "Camping Site List",
   "resource_declaration": "Resource Declaration",
-  "settings": "Settings"
+  "settings": "Settings",
+  "weather_data_source_is": "The weather data is sourced from",
+  "camping_data_source_is": "The camping area data is sourced from the government open data platform, currently using the version dated",
+  "date": "Date",
+  "temperature_max": "Max Temperature",
+  "temperature_min": "Min Temperature",
+  "pricipitation_probability": "Rain Chance",
+  "today": "Today",
+  "weather_forecast_warning": "Unable to retrieve weather information",
+  "weather_forecast_is_empty": "No weather information available"
 }

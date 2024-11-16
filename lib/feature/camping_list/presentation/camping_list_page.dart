@@ -1,7 +1,9 @@
+import 'package:camping/core/data/model/camping_site.dart';
 import 'package:camping/core/domain/usecase/local_get_camping_site_use_case.dart';
 import 'package:camping/extension/string_extension.dart';
 import 'package:camping/feature/camping_list/presentation/camping_card.dart';
 import 'package:camping/feature/camping_list/presentation/camping_list_controller.dart';
+import 'package:camping/feature/camping_list/presentation/camping_list_protocol.dart';
 import 'package:camping/feature/component/app_bar_action_size.dart';
 import 'package:camping/style/color_style.dart';
 import 'package:camping/style/style.dart';
@@ -18,7 +20,8 @@ class CampingListPage extends StatefulWidget {
   State<StatefulWidget> createState() => _CampingListPageState();
 }
 
-class _CampingListPageState extends State<CampingListPage> {
+class _CampingListPageState extends State<CampingListPage>
+    implements CampingListProtocol {
   CampingListController? controller;
 
   @override
@@ -26,6 +29,7 @@ class _CampingListPageState extends State<CampingListPage> {
     super.initState();
     controller = CampingListController(
       getCampingSiteUseCase: LocalGetCampingSiteUseCase(),
+      protocol: this,
     );
     controller?.fetchCampingSities();
   }
@@ -106,6 +110,11 @@ class _CampingListPageState extends State<CampingListPage> {
                               wgs: snapshot.data?[index]?.latitudeAndLongitude,
                             );
                           },
+                          onCardTap: () {
+                            controller?.onCardTap(
+                              campingSiteUuid: snapshot.data?[index]?.uuid,
+                            );
+                          },
                         ),
                       ),
                       separatorBuilder: (context, index) => SizedBox(
@@ -119,4 +128,9 @@ class _CampingListPageState extends State<CampingListPage> {
           ),
         ),
       );
+
+  @override
+  void goToCampingSite(CampingSite? data) {
+    GoRouter.of(context).push('/campingSitePage', extra: data);
+  }
 }

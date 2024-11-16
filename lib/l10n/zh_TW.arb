@@ -9,5 +9,14 @@
   "search_camping_site_hint": "輸入名稱或地址搜尋",
   "camping_site_list": "露營區列表",
   "resource_declaration": "資料來源聲明",
-  "settings": "設定"
+  "settings": "設定",
+  "weather_data_source_is": "天氣資料來源為",
+  "camping_data_source_is": "露營區資料來源為政府資料開放平臺，目前使用日期版本為",
+  "date": "日期",
+  "temperature_max": "最高溫",
+  "temperature_min": "最低溫",
+  "pricipitation_probability": "降雨機率",
+  "today": "今日",
+  "weather_forecast_warning": "無法取得天氣資訊",
+  "weather_forecast_is_empty": "沒有天氣資訊"
 }

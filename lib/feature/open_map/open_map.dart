@@ -1,8 +1,9 @@
 import 'package:url_launcher/url_launcher.dart';
 
-Future<void> openMap({String? saddr, String? daddr}) async {
-  final String googleMapsUrl = 'comgooglemaps://?q=$saddr,$daddr';
-  final String appleMapsUrl = 'http://maps.apple.com/?q=$saddr,$daddr';
+Future<void> openMap({String? latitude, String? longitude}) async {
+  final String googleMapsUrl =
+      'comgooglemaps://?center=$latitude,$longitude&q=$latitude,$longitude';
+  final String appleMapsUrl = 'http://maps.apple.com/?ll=$latitude,$longitude';
 
   if (await canLaunchUrl(Uri.parse(googleMapsUrl))) {
     await launchUrl(Uri.parse(googleMapsUrl),

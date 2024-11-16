@@ -52,6 +52,7 @@ class _SettingPageState extends State<SettingPage> {
                 fontSize: title.sp,
               ),
             ),
+            foregroundColor: mainFontColor,
           ),
           bottomNavigationBar: BottomBar(),
           body: Padding(

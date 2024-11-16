@@ -10,4 +10,15 @@ class LocalRepository implements Repositories {
       await rootBundle.loadString('assets/location/taiwanCamping.json'),
     );
   }
+
+  @override
+  Future<dynamic> getForecast({
+    String? latitude,
+    String? longitude,
+    String? aboveSeaLevel,
+  }) async {
+    return jsonDecode(
+      await rootBundle.loadString('assets/test/forecast.json'),
+    );
+  }
 }

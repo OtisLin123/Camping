@@ -18,9 +18,9 @@ dependencies:
   keyboard_dismisser: ^3.0.0
   fuzzy: ^0.5.1
   package_info_plus: ^8.0.1
-
   cupertino_icons: ^1.0.6
   uuid: ^4.5.1
+  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:
@@ -33,5 +33,7 @@ flutter:
 
   assets:
     - assets/location/taiwanCamping.json
+    - assets/key.json
+    - assets/test/forecast.json
     - lib/l10n/en_US.arb
     - lib/l10n/zh_TW.arb

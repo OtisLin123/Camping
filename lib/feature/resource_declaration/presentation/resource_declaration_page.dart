@@ -34,6 +34,7 @@ class _ResourceDeclarationPageState extends State<ResourceDeclarationPage> {
               fontSize: title.sp,
             ),
           ),
+          foregroundColor: mainFontColor,
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: bodyMedinumGap.w),
@@ -43,14 +44,15 @@ class _ResourceDeclarationPageState extends State<ResourceDeclarationPage> {
               Padding(
                 padding: EdgeInsets.only(bottom: itemGap.w),
                 child: LinkText(
-                  content: '露營區資料來源為政府資料開放平臺，目前使用$govOpenDataSourceDate的版本',
+                  content:
+                      '${'camping_data_source_is'.locale()} $govOpenDataSourceDate',
                   onTap: () {
                     controller.launchGovOpenDataWeb();
                   },
                 ),
               ),
               LinkText(
-                content: '天氣資料來源為MeteoBlue',
+                content: '${'weather_data_source_is'.locale()} MeteoBlue',
                 onTap: () {
                   controller.launchWeatherWeb();
                 },

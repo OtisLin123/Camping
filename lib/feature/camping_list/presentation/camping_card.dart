@@ -13,6 +13,7 @@ class CampingCard extends StatelessWidget {
   final String? website;
   final String? compliantWithRelevantRegulations;
   final String? violationOfRelevantRegulations;
+  final Function()? onCardTap;
   final Function(String? url)? onWebsiteTap;
   final Function()? onAddressTap;
 
@@ -24,63 +25,67 @@ class CampingCard extends StatelessWidget {
     this.website,
     this.compliantWithRelevantRegulations,
     this.violationOfRelevantRegulations,
+    this.onCardTap,
     this.onWebsiteTap,
     this.onAddressTap,
   });
 
   @override
-  Widget build(BuildContext context) => Container(
-        decoration: BoxDecoration(
-          color: subColor,
-          //  violationOfRelevantRegulations?.isEmpty ?? true
-          //     ? subColor
-          //     : warningColor,
-          borderRadius: BorderRadius.circular(cardRadius.w),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(
-            normalPadding.w,
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: onCardTap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: subColor,
+            //  violationOfRelevantRegulations?.isEmpty ?? true
+            //     ? subColor
+            //     : warningColor,
+            borderRadius: BorderRadius.circular(cardRadius.w),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _Info(
-                title: 'camping_name'.locale(),
-                content: name,
-              ),
-              if (address?.isNotEmpty ?? false)
+          child: Padding(
+            padding: EdgeInsets.all(
+              normalPadding.w,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 _Info(
-                  title: 'camping_address'.locale(),
-                  content: address,
-                  canTap: true,
-                  onTap: onAddressTap,
+                  title: 'camping_name'.locale(),
+                  content: name,
                 ),
-              if (phoneNumber?.isNotEmpty ?? false)
-                _Info(
-                  title: 'camping_phone_number'.locale(),
-                  content: phoneNumber,
-                ),
-              if (website?.isNotEmpty ?? false)
-                _Info(
-                  title: 'camping_website'.locale(),
-                  content: website,
-                  canTap: true,
-                  onTap: () {
-                    onWebsiteTap?.call(website);
-                  },
-                ),
-              if (compliantWithRelevantRegulations?.isNotEmpty ?? false)
-                _Info(
-                  title: 'compliant_relevant_regulations'.locale(),
-                  content: compliantWithRelevantRegulations,
-                ),
-              if (violationOfRelevantRegulations?.isNotEmpty ?? false)
-                _Info(
-                  title: 'violation_relevant_regulations'.locale(),
-                  content: violationOfRelevantRegulations,
-                ),
-            ],
+                if (address?.isNotEmpty ?? false)
+                  _Info(
+                    title: 'camping_address'.locale(),
+                    content: address,
+                    canTap: true,
+                    onTap: onAddressTap,
+                  ),
+                if (phoneNumber?.isNotEmpty ?? false)
+                  _Info(
+                    title: 'camping_phone_number'.locale(),
+                    content: phoneNumber,
+                  ),
+                if (website?.isNotEmpty ?? false)
+                  _Info(
+                    title: 'camping_website'.locale(),
+                    content: website,
+                    canTap: true,
+                    onTap: () {
+                      onWebsiteTap?.call(website);
+                    },
+                  ),
+                if (compliantWithRelevantRegulations?.isNotEmpty ?? false)
+                  _Info(
+                    title: 'compliant_relevant_regulations'.locale(),
+                    content: compliantWithRelevantRegulations,
+                  ),
+                if (violationOfRelevantRegulations?.isNotEmpty ?? false)
+                  _Info(
+                    title: 'violation_relevant_regulations'.locale(),
+                    content: violationOfRelevantRegulations,
+                  ),
+              ],
+            ),
           ),
         ),
       );
@@ -108,7 +113,11 @@ class _Info extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('$title', style: TextStyle(fontSize: normal.sp)),
+            Text('$title',
+                style: TextStyle(
+                  fontSize: normal.sp,
+                  color: mainFontColor,
+                )),
             Padding(
               padding: EdgeInsets.only(left: normalPadding.w),
               child: LinkText(

@@ -2,6 +2,7 @@ import 'package:camping/core/data/model/camping_site.dart';
 import 'package:camping/core/domain/usecase/get_camping_site_use_case.dart';
 import 'package:camping/feature/camping_list/domain/entities/camping_card_data.dart';
 import 'package:camping/feature/camping_list/domain/usecase/convert_camping_card_datas_use_case.dart';
+import 'package:camping/feature/camping_list/presentation/camping_list_protocol.dart';
 import 'package:camping/feature/open_map/open_map.dart';
 import 'package:fuzzy/fuzzy.dart';
 import 'package:rxdart/subjects.dart';
@@ -9,6 +10,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class CampingListController {
   GetCampingSiteUseCase? getCampingSiteUseCase;
+
+  CampingListProtocol? protocol;
 
   BehaviorSubject<List<CampingSite?>?> campingSities =
       BehaviorSubject<List<CampingSite?>?>.seeded(null);
@@ -18,6 +21,7 @@ class CampingListController {
 
   CampingListController({
     this.getCampingSiteUseCase,
+    this.protocol,
   });
 
   void fetchCampingSities() {
@@ -41,9 +45,22 @@ class CampingListController {
       return;
     }
     List<String?>? latitudeAndLongitude = wgs?.split(',');
-    String? saddr = latitudeAndLongitude?.first ?? '';
-    String? daddr = latitudeAndLongitude?.last ?? '';
-    openMap(saddr: saddr.trim(), daddr: daddr.trim());
+    String? latitude = latitudeAndLongitude?.first ?? '';
+    String? longitude = latitudeAndLongitude?.last ?? '';
+    openMap(latitude: latitude.trim(), longitude: longitude.trim());
+  }
+
+  void onCardTap({String? campingSiteUuid}) {
+    if (campingSiteUuid == null) {
+      return;
+    }
+    CampingSite? data;
+    campingSities.value?.forEach((e) {
+      if (e?.uuid == campingSiteUuid) {
+        data = e;
+      }
+    });
+    protocol?.goToCampingSite(data);
   }
 
   void onSearchTextChanged(String text) {

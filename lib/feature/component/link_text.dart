@@ -21,6 +21,8 @@ class LinkText extends StatelessWidget {
           style: TextStyle(
             fontSize: normal.sp,
             color: onTap != null ? linkFontColor : mainFontColor,
+            decoration: onTap != null ? TextDecoration.underline : null,
+            decorationColor: linkFontColor,
           ),
         ),
       );
