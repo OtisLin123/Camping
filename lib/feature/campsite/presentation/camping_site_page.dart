@@ -1,5 +1,5 @@
 import 'package:camping/core/data/model/camping_site.dart';
-import 'package:camping/core/domain/usecase/mock_forecast_data_use_case.dart';
+import 'package:camping/core/domain/usecase/imp_forecast_data_imp_use_case.dart';
 import 'package:camping/extension/string_extension.dart';
 import 'package:camping/feature/campsite/domain/entities/day_weather_data.dart';
 import 'package:camping/feature/campsite/presentation/camping_site_controller.dart';
@@ -30,7 +30,7 @@ class _CampingSitePageState extends State<CampingSitePage> {
     super.initState();
     controller = CampingSiteController(
       sourceData: widget.data,
-      forecastDataUseCase: MockForecastDataUseCase(),
+      forecastDataUseCase: ImpForecastDataUseCase(),
     );
     controller?.init();
   }

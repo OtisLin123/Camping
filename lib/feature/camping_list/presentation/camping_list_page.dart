@@ -1,5 +1,5 @@
 import 'package:camping/core/data/model/camping_site.dart';
-import 'package:camping/core/domain/usecase/mock_get_camping_site_use_case.dart';
+import 'package:camping/core/domain/usecase/imp_get_camping_site_use_case.dart';
 import 'package:camping/extension/string_extension.dart';
 import 'package:camping/feature/camping_list/presentation/camping_card.dart';
 import 'package:camping/feature/camping_list/presentation/camping_list_controller.dart';
@@ -28,7 +28,7 @@ class _CampingListPageState extends State<CampingListPage>
   void initState() {
     super.initState();
     controller = CampingListController(
-      getCampingSiteUseCase: MockGetCampingSiteUseCase(),
+      getCampingSiteUseCase: ImpGetCampingSiteUseCase(),
       protocol: this,
     );
     controller?.fetchCampingSities();
