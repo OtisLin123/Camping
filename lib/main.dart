@@ -19,8 +19,11 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    Locale systemLocale = WidgetsBinding.instance.platformDispatcher.locale;
-    AppLocalizations().setLocal(systemLocale);
+    // Locale systemLocale = WidgetsBinding.instance.platformDispatcher.locale;
+    // if (systemLocale.languageCode == 'en') {
+    //   systemLocale = Locale('en', 'US');
+    // }
+    // AppLocalizations().setLocal(systemLocale);
   }
 
   @override
