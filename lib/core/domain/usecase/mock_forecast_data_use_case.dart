@@ -4,16 +4,16 @@ import 'package:camping/core/data/model/forecast_meta_data.dart';
 import 'package:camping/core/data/model/forecast_units.dart';
 import 'package:camping/core/domain/entities/forecast_data.dart';
 import 'package:camping/core/domain/usecase/forecast_data_use_case.dart';
-import 'package:camping/core/repositories/local_repository.dart';
+import 'package:camping/core/repositories/mock_repository.dart';
 
-class LocalForecastDataUseCase extends ForecastDataUseCase {
+class MockForecastDataUseCase extends ForecastDataUseCase {
   @override
   Future<ForecastData?> getForecast({
     String? latitude,
     String? longitude,
     String? aboveSeaLevel,
   }) async {
-    dynamic forecast = await LocalRepository().getForecast();
+    dynamic forecast = await MockRepository().getForecast();
     ForecastMetadata? metaData = ForecastMetadata.fromJson(
       forecast['metadata'],
     );

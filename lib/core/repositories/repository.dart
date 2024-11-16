@@ -23,6 +23,9 @@ class Repository implements Repositories {
     String? longitude,
     String? aboveSeaLevel,
   }) async {
+    if (latitude == null || longitude == null) {
+      return {};
+    }
     dynamic keyData = jsonDecode(
       await rootBundle.loadString('assets/key.json'),
     );
@@ -31,11 +34,10 @@ class Repository implements Repositories {
       return;
     }
     String url =
-        'https://my.meteoblue.com/packages/basic-1h_basic-day_moonlight-1h?apikey=$forecastApiKey&lat=$latitude&lon=$longitude&format=json';
-    print('forecast url: $url');
+        'https://my.meteoblue.com/packages/basic-1h_basic-day_clouds-1h_moonlight-1h?apikey=$forecastApiKey&lat=$latitude&lon=$longitude&format=json';
     Response<dynamic>? res = await apiService?.fetchData(
       path: url,
     );
-    print(res);
+    return res?.data;
   }
 }

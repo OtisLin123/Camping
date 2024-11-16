@@ -20,16 +20,16 @@ class ForecastMetadata {
       this.utcTimeoffset,
       this.generationTimeMs});
 
-  ForecastMetadata.fromJson(Map<String, dynamic> json) {
-    modelrunUpdatetimeUtc = json['modelrun_updatetime_utc'];
-    name = json['name'];
-    height = json['height'];
-    timezoneAbbrevation = json['timezone_abbrevation'];
-    latitude = json['latitude'];
-    modelrunUtc = json['modelrun_utc'];
-    longitude = json['longitude'];
-    utcTimeoffset = json['utc_timeoffset'];
-    generationTimeMs = json['generation_time_ms'];
+  ForecastMetadata.fromJson(Map<String, dynamic>? json) {
+    modelrunUpdatetimeUtc = json?['modelrun_updatetime_utc'];
+    name = json?['name'];
+    height = json?['height'];
+    timezoneAbbrevation = json?['timezone_abbrevation'];
+    latitude = json?['latitude'];
+    modelrunUtc = json?['modelrun_utc'];
+    longitude = json?['longitude'];
+    utcTimeoffset = json?['utc_timeoffset'];
+    generationTimeMs = json?['generation_time_ms'];
   }
 
   Map<String, dynamic> toJson() {

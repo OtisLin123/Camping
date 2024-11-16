@@ -51,14 +51,75 @@ class _ResourceDeclarationPageState extends State<ResourceDeclarationPage> {
                   },
                 ),
               ),
-              LinkText(
-                content: '${'weather_data_source_is'.locale()} MeteoBlue',
-                onTap: () {
-                  controller.launchWeatherWeb();
-                },
-              )
+              Padding(
+                padding: EdgeInsets.only(bottom: itemGap.w),
+                child: LinkText(
+                  content: '${'weather_data_source_is'.locale()} MeteoBlue',
+                  onTap: () {
+                    controller.launchWeatherWeb();
+                  },
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: itemGap.w),
+                child: _Info(
+                    title: 'stargazing_condition_calculation_formula'.locale(),
+                    content: [
+                      '${'night_sky_impact'.locale()} delta = ${'nightsky_brightness_actual'.locale()}-${'nightsky_brightness_clearsky'.locale()}',
+                      '100,  if delta <= 0',
+                      '((2 - delta) / 2) * 100, if 0 < delta < 2',
+                      '0, if delta >= 2',
+                      ('cloud_impact'.locale()),
+                      'min(100, max(0,100-(${'totalcloudcover'.locale()}+${'fogProbability'.locale()})))',
+                      ('moonlight_impact'.locale()),
+                      'min(100, max(0,100-(${'moonlight_actual'.locale()}-${'moonlight_clearsky'.locale()})))',
+                    ]),
+              ),
             ],
           ),
+        ),
+      );
+}
+
+class _Info extends StatelessWidget {
+  final String? title;
+  final List<String?>? content;
+
+  const _Info({
+    this.title,
+    this.content,
+  });
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: normalPadding.w,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '$title',
+              style: TextStyle(
+                fontSize: normal.sp,
+                color: mainFontColor,
+              ),
+            ),
+            ...List.generate(
+              content?.length ?? 0,
+              (index) => Padding(
+                padding: EdgeInsets.only(left: normalPadding.w),
+                child: Text(
+                  content?[index] ?? '',
+                  style: TextStyle(
+                    fontSize: normal.sp,
+                    color: mainFontColor,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       );
 }

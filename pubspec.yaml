@@ -35,5 +35,6 @@ flutter:
     - assets/location/taiwanCamping.json
     - assets/key.json
     - assets/test/forecast.json
+    - assets/meteo_blue/pictograms/
     - lib/l10n/en_US.arb
     - lib/l10n/zh_TW.arb
