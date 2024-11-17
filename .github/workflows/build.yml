@@ -101,19 +101,6 @@ jobs:
             -exportOptionsPlist ./ios/ExportOptions.plist \
             -exportPath ./build/ios/ipa
 
-      - name: Upload IPA as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: ipa
-          path: ./build/ios/ipa/camping.ipa
-
-      - name: Download IPA artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: ipa
-          path: ./build/ios/ipa/camping.ipa
-
-
       - name: Upload to TestFlight
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
@@ -128,6 +115,10 @@ jobs:
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
         run: |
-          security delete-keychain $RUNNER_TEMP/app-signing-distribution.keychain-db
+          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
           rm ~/Library/MobileDevice/Provisioning\ Profiles/distribution_pp.mobileprovision
+
+      - name: Remove existing IPA file
+        run: |
+          rm -f ./build/ios/ipa/camping.ipa
 
