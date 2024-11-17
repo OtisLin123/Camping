@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:camping/core/data/model/camping_site.dart';
 import 'package:camping/core/domain/usecase/imp_forecast_data_imp_use_case.dart';
 import 'package:camping/extension/string_extension.dart';
@@ -12,7 +10,6 @@ import 'package:camping/style/color_style.dart';
 import 'package:camping/style/style.dart';
 import 'package:camping/style/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
@@ -64,16 +61,6 @@ class _CampingSitePageState extends State<CampingSitePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                StreamBuilder(
-                  stream: controller?.apiKey,
-                  builder: (context, snapshot) => Text(
-                    snapshot.data ?? 'unknown',
-                    style: TextStyle(
-                      fontSize: normal.sp,
-                      color: mainFontColor,
-                    ),
-                  ),
-                ),
                 StreamBuilder(
                   stream: controller?.campingSitePageData,
                   builder: (context, snapshot) => _BaseInfo(

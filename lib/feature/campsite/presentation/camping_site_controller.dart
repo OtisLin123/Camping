@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:camping/core/data/model/camping_site.dart';
 import 'package:camping/core/domain/entities/forecast_data.dart';
 import 'package:camping/core/domain/usecase/forecast_data_use_case.dart';
@@ -8,7 +6,6 @@ import 'package:camping/feature/campsite/domain/entities/day_weather_data.dart';
 import 'package:camping/feature/campsite/domain/usecase/convert_camping_site_page_data_use_case.dart';
 import 'package:camping/feature/campsite/domain/usecase/get_day_weather.dart';
 import 'package:camping/feature/open_map/open_map.dart';
-import 'package:flutter/services.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,8 +15,6 @@ class CampingSiteController {
 
   BehaviorSubject<List<DayWeatherData?>?> dayWeahters =
       BehaviorSubject<List<DayWeatherData?>?>.seeded(null);
-
-  BehaviorSubject<String?> apiKey = BehaviorSubject<String?>.seeded(null);
 
   CampingSite? sourceData;
   ForecastDataUseCase? forecastDataUseCase;
@@ -72,17 +67,5 @@ class CampingSiteController {
       longitude: longitude.trim(),
     );
     dayWeahters.add(GetDayWeather().get7DayWeathers(forecast));
-
-    dynamic keyData = jsonDecode(
-      await rootBundle.loadString('assets/key.json'),
-    );
-    String? forecastApiKey = keyData['forecastApiKey'];
-    if (forecastApiKey?.isEmpty ?? true) {
-      return;
-    }
-    String url =
-        'https://my.meteoblue.com/packages/basic-1h_basic-day_clouds-1h_moonlight-1h?apikey=$forecastApiKey&lat=$latitude&lon=$longitude&format=json';
-
-    apiKey.add(url);
   }
 }
