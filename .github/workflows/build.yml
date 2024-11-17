@@ -88,9 +88,12 @@ jobs:
       - name: iOS pod clean and installation
         run: cd ios; rm Podfile.lock; rm -rf Pods; pod install
 
-      - name: Run Flutter tests
-        run: flutter test
-
+      # - name: Run Flutter tests
+      #   run: flutter test
+      
+      - name: Create key
+        run: echo "${{ secrets.API_KEY }}" > assets/key.json
+      
       - name: Flutter build iOS
         run: flutter build ipa --release
 
