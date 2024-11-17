@@ -52,15 +52,11 @@ jobs:
           # Create variables
           CERTIFICATE_PATH=$RUNNER_TEMP/distribution_certificate.p12
           PP_PATH=$RUNNER_TEMP/distribution_pp.mobileprovision
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing-distribution.keychain-db
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
           # Import certificate and provisioning profile from secrets
           echo -n "$DISTRIBUTION_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
           echo -n "$DISTRIBUTION_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
-
-          # Create and unlock temporary keychain
-          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
           # Import certificate into keychain
           security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
@@ -70,7 +66,6 @@ jobs:
           # Apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-          security unlock-keychain -p "$KEYCHAIN_PASSWORD" login.keychain
 
       - name: Install jq (macOS)
         run: brew install jq
