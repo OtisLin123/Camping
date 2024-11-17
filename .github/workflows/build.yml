@@ -90,7 +90,10 @@ jobs:
 
       # - name: Run Flutter tests
       #   run: flutter test
-
+      
+      - name: Create key
+        run: echo "${{ secrets.API_KEY }}" > assets/key.json
+      
       - name: Flutter build iOS
         run: flutter build ipa --release
 
