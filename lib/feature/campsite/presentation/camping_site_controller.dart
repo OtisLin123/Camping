@@ -58,6 +58,10 @@ class CampingSiteController {
         sourceData?.latitudeAndLongitude?.split(',');
     String? latitude = latitudeAndLongitude?.first ?? '';
     String? longitude = latitudeAndLongitude?.last ?? '';
+    if (latitude.isEmpty || longitude.isEmpty) {
+      dayWeahters.add([]);
+      return;
+    }
     ForecastData? forecast = await forecastDataUseCase?.getForecast(
       latitude: latitude.trim(),
       longitude: longitude.trim(),

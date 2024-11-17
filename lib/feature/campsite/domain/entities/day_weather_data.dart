@@ -73,8 +73,8 @@ class DayWeatherData {
     if (totalcloudcover == null || fogProbability == null) {
       return null;
     }
-    num source = max(0, 100 - (totalcloudcover + fogProbability));
-    return min(source, 100);
+    num source = max(0, 200 - (totalcloudcover + fogProbability));
+    return min(source, 200);
   }
 
   num getStarRatingAvarage() {
@@ -111,7 +111,7 @@ class DayWeatherData {
         result.add(null);
       } else {
         num? starRatingSource =
-            ((nightSkySource + moonlightImpact + cloudImpact) / 300) * 100;
+            ((nightSkySource + moonlightImpact + cloudImpact) / 400) * 100;
         starRatingSource = starRatingSource.floor();
         result.add(
           StarRating(
