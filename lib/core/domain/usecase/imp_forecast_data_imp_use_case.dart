@@ -1,21 +1,22 @@
-import 'package:camping/core/data/dio_api_service.dart';
 import 'package:camping/core/data/model/forecast_data_1h.dart';
 import 'package:camping/core/data/model/forecast_data_day.dart';
 import 'package:camping/core/data/model/forecast_meta_data.dart';
 import 'package:camping/core/data/model/forecast_units.dart';
 import 'package:camping/core/domain/entities/forecast_data.dart';
 import 'package:camping/core/domain/usecase/forecast_data_use_case.dart';
-import 'package:camping/core/repositories/repository.dart';
+import 'package:camping/core/repositories/repositories.dart';
 
 class ImpForecastDataUseCase extends ForecastDataUseCase {
+  Repositories? repository;
+  ImpForecastDataUseCase({required this.repository});
+
   @override
   Future<ForecastData?> getForecast({
     String? latitude,
     String? longitude,
     String? aboveSeaLevel,
   }) async {
-    dynamic forecast =
-        await Repository(apiService: DioApiService()).getForecast(
+    dynamic forecast = await repository?.getForecast(
       latitude: latitude,
       longitude: longitude,
     );

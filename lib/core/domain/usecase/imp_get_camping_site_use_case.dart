@@ -1,12 +1,15 @@
 import 'package:camping/core/data/model/camping_site.dart';
 import 'package:camping/core/domain/usecase/get_camping_site_use_case.dart';
-import 'package:camping/core/repositories/mock_repository.dart';
+import 'package:camping/core/repositories/repositories.dart';
 import 'package:uuid/uuid.dart';
 
 class ImpGetCampingSiteUseCase implements GetCampingSiteUseCase {
+  Repositories? repository;
+  ImpGetCampingSiteUseCase({required this.repository});
+
   @override
   Future<List<CampingSite>> getCampingSite() async {
-    dynamic campings = await MockRepository().getCapmingSite();
+    dynamic campings = await repository?.getCapmingSite();
     List<CampingSite> result = [];
     for (dynamic camping in campings) {
       if (camping['電話'] == '無') {

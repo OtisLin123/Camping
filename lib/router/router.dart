@@ -1,3 +1,4 @@
+import 'package:camping/core/app/app_controller.dart';
 import 'package:camping/core/data/model/camping_site.dart';
 import 'package:camping/feature/camping_list/presentation/camping_list_page.dart';
 import 'package:camping/feature/campsite/presentation/camping_site_page.dart';
@@ -14,7 +15,9 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/',
       name: 'campingListPage',
-      builder: (context, state) => const CampingListPage(),
+      builder: (context, state) => CampingListPage(
+        repository: AppController().repositories,
+      ),
     ),
     GoRoute(
       path: '/resourceDeclarationPage',
@@ -30,6 +33,7 @@ final appRouter = GoRouter(
       path: '/campingSitePage',
       name: 'campingSitePage',
       builder: (context, state) => CampingSitePage(
+        repository: AppController().repositories,
         data: state.extra as CampingSite?,
       ),
     ),

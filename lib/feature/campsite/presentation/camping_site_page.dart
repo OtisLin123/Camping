@@ -1,5 +1,6 @@
 import 'package:camping/core/data/model/camping_site.dart';
 import 'package:camping/core/domain/usecase/imp_forecast_data_imp_use_case.dart';
+import 'package:camping/core/repositories/repositories.dart';
 import 'package:camping/extension/string_extension.dart';
 import 'package:camping/feature/campsite/domain/entities/day_weather_data.dart';
 import 'package:camping/feature/campsite/presentation/camping_site_controller.dart';
@@ -14,8 +15,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class CampingSitePage extends StatefulWidget {
-  const CampingSitePage({super.key, this.data});
+  const CampingSitePage({
+    super.key,
+    this.data,
+    required this.repository,
+  });
 
+  final Repositories? repository;
   final CampingSite? data;
 
   @override
@@ -30,7 +36,8 @@ class _CampingSitePageState extends State<CampingSitePage> {
     super.initState();
     controller = CampingSiteController(
       sourceData: widget.data,
-      forecastDataUseCase: ImpForecastDataUseCase(),
+      forecastDataUseCase:
+          ImpForecastDataUseCase(repository: widget.repository),
     );
     controller?.init();
   }
@@ -176,7 +183,9 @@ class _WeatherInfo extends StatelessWidget {
 
     return Expanded(
       child: ListView.separated(
+        key: const ValueKey('weather_list'),
         itemBuilder: (context, index) => Card(
+          key: ValueKey('weather_card_$index'),
           child: DayWeather(
             data: datas?[index],
           ),

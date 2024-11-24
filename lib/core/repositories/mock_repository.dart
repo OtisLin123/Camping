@@ -17,6 +17,7 @@ class MockRepository implements Repositories {
     String? longitude,
     String? aboveSeaLevel,
   }) async {
+    await Future.delayed(const Duration(seconds: 3));
     return jsonDecode(
       await rootBundle.loadString('assets/test/forecast.json'),
     );

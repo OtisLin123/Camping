@@ -1,5 +1,6 @@
 import 'package:camping/core/data/model/camping_site.dart';
 import 'package:camping/core/domain/usecase/imp_get_camping_site_use_case.dart';
+import 'package:camping/core/repositories/repositories.dart';
 import 'package:camping/extension/string_extension.dart';
 import 'package:camping/feature/camping_list/presentation/camping_card.dart';
 import 'package:camping/feature/camping_list/presentation/camping_list_controller.dart';
@@ -14,7 +15,12 @@ import 'package:go_router/go_router.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class CampingListPage extends StatefulWidget {
-  const CampingListPage({super.key});
+  const CampingListPage({
+    super.key,
+    required this.repository,
+  });
+
+  final Repositories? repository;
 
   @override
   State<StatefulWidget> createState() => _CampingListPageState();
@@ -28,7 +34,9 @@ class _CampingListPageState extends State<CampingListPage>
   void initState() {
     super.initState();
     controller = CampingListController(
-      getCampingSiteUseCase: ImpGetCampingSiteUseCase(),
+      getCampingSiteUseCase: ImpGetCampingSiteUseCase(
+        repository: widget.repository,
+      ),
       protocol: this,
     );
     controller?.fetchCampingSities();
@@ -90,9 +98,11 @@ class _CampingListPageState extends State<CampingListPage>
                   child: StreamBuilder(
                     stream: controller?.campingSiteCardDatas,
                     builder: (context, snapshot) => ListView.separated(
+                      key: const ValueKey('camping_site_list'),
                       itemCount: snapshot.data?.length ?? 0,
                       itemBuilder: (context, index) => Card(
                         child: CampingCard(
+                          key: ValueKey('camping_site_card_$index'),
                           name: snapshot.data?[index]?.name,
                           address: snapshot.data?[index]?.address,
                           phoneNumber: snapshot.data?[index]?.phoneNumber,
